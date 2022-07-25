@@ -1,0 +1,30 @@
+.header-style {
+    background-color: #222;
+    height: 36px;
+    padding: 8px 32px 8px 16px;
+}
+
+.rotate-icon {
+    background-color: #ff7f7f;
+    height: 35px;
+    animation: spin 8s linear infinite;
+    float: left;
+}
+
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+.login-button {
+    float: right; 
+}
+
+.book-show-button {
+    float: right;
+    padding-right: 50px;
+}
