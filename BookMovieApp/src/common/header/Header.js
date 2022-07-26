@@ -24,8 +24,6 @@ const customStyles = {
     }
 };
 
-const env = "http://localhost:8085"
-
 const TabContainer = function (props) {
     return (
         <Typography component="div" style={{ padding: 0, textAlign: 'center' }}>
@@ -172,18 +170,20 @@ class Header extends Component{
             redirect: 'follow'
           };
         
-        const response = fetch(this.props.baseUrl+ "signup", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-        
         let that = this
-        if(response.status === "ACTIVE") {
+        fetch(this.props.baseUrl + "signup", requestOptions)
+        .then(response => {
+            console.log("response",response)
+        if(response.status === 201) {
             that.setState({
                 registeredSuccessfully: true
             })
-
         }
+        return response.text()})
+        .then(result => console.log(" result ",result)
+        )
+        .catch(error => console.log('error', error));
+
     }
 
     logoutHandler = (e) => {
@@ -214,17 +214,17 @@ class Header extends Component{
                         </div>
                     }
      
-         
-                    <div className="bookshow-button">
-                            <Button variant="contained" color="primary" onClick={this.openModalHandler}>
-                                Book Show
-                            </Button>
-                    </div>
+                    {this.props.showBookShowButton==="true" && !this.state.loggedIn
+                        ? <div className="book-show-button">
+                                <Button variant="contained" color="primary" onClick={this.onOpenModal}>
+                                    Book Show
+                                </Button>
+                        </div>
+                        : ""
+                    }
                       
-                    
-                      
-                    {this.props.showBookShowButton === "true" && this.state.loggedIn
-                        ? <div className="bookshow-button">
+                    {this.props.showBookShowButton==="true" && this.state.loggedIn
+                        ? <div className="book-show-button">
                             <Link to={"/bookshow/" + this.props.id}>
                                 <Button variant="contained" color="primary">
                                     Book Show
@@ -233,6 +233,7 @@ class Header extends Component{
                         </div>
                         : ""
                     }
+
                 </div>
                 <Modal
                     ariaHideApp={false}
@@ -321,7 +322,7 @@ class Header extends Component{
                             {this.state.registeredSuccessfully === true &&
                                 <FormControl>
                                     <span className="successText">
-                                        Successfully Registered! 
+                                        Registration Successful. Please Login!
                                       </span>
                                 </FormControl>
                             }
