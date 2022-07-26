@@ -1,4 +1,4 @@
-.header-style {
+.header {
     background-color: #222;
     height: 36px;
     padding: 8px 32px 8px 16px;
@@ -12,12 +12,7 @@
 }
 
 @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  from { transform: scaleX(-1); }
   }
 
 .login-button {
@@ -26,5 +21,13 @@
 
 .book-show-button {
     float: right;
-    padding-right: 50px;
+    margin-right: 8px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
